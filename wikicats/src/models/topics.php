@@ -21,6 +21,8 @@ class TopicsRepository
 {
     /** 
      * @property $connection => propriété de la bdd
+     * 
+     * @see accès à la bdd
      */
     public DatabaseConnection $connection;
 
@@ -39,155 +41,195 @@ class TopicsRepository
     /**
      * @method getTopicsByUser @param $catId
      * Méthode pour récupérer les topics d'un utilisateur
+     * 
+     * @return $result tableau des topics par utilisateur
+     * 
+     * @see table topics 
+     * 
      */    
     public function getTopicsByUser($catId)
     {
-        // Préparation de la requête pour créer un utilisateur
+
         $query = $this->connection->getConnection()->prepare(
             "SELECT * FROM topics WHERE cat_id = ? ORDER BY date_creation DESC"
         );
-        // Exécution de la requête pour créer un utilisateur
         $query->execute([$catId]);
         $result = $query->fetchAll();
 
         return $result;
     }
 
-    // Modify a topic
+    /**
+     * @method updateTopic @param $title, $content, $topicId
+     * Modifier le topic d'un utilisateur
+     * 
+     * @see modifie la table topics
+     * 
+     */   
     public function updateTopic($title, $content, $topicId)
     {
-        // Request to modify topic information
         $query = $this->connection->getConnection()->prepare(
             "UPDATE topics SET title = ?, content = ? WHERE id = ?"
         );
-        // Execution of the request to connect a topic by his id
         $query->execute([$title, $content, $topicId]);       
     }
 
-    // Delete a topic
+    /**
+     * @method deleteTopic @param $topicId
+     * Supprimer le topic d'un utilisateur
+     * 
+     * @see supprime un topic de la table topics
+     * 
+     */   
     public function deleteTopic($topicId)
     {
-        // Request to delete topic information
         $query = $this->connection->getConnection()->prepare(
             "DELETE FROM topics WHERE id = ?"
         );
-        // Execution of the request to connect a topic by his id
         $query->execute([$topicId]);       
     }
 
-        // Get all categories
-        public function getCategories()
-        {
-            // Request to show all categories
-            $query = $this->connection->getConnection()->prepare(
-                "SELECT category FROM topics ORDER BY category ASC"
-            );
-            // Exécution de la requête pour créer un utilisateur
-            $query->execute([]);
-            $result = $query->fetchAll();
-    
-            return $result;
-        }
+    /**
+     * @method getCategories
+     * Récupère toutes les catégories
+     * 
+     * @see retourne toutes les catégories de la table topics
+     */   
+    public function getCategories()
+    {
+        $query = $this->connection->getConnection()->prepare(
+            "SELECT category FROM topics ORDER BY category ASC"
+        );
+        $query->execute([]);
+        $result = $query->fetchAll();
 
-        // Get all topics of a category
-        public function showCategory($category)
-        {
-            // Request to show all topics of a category
-            $query = $this->connection->getConnection()->prepare(
-                "SELECT * FROM topics WHERE category = ? ORDER BY date_creation DESC"
-            );
-            // Exécution de la requête pour créer un utilisateur
-            $query->execute([$category]);
-            $result = $query->fetchAll();
+        return $result;
+    }
 
-            // print_r($result);
-    
-            return $result;
-        }
+    /**
+     * @method showCategory @param $category valeur de la catégorie
+     * Récupérer les topics par catégorie
+     * 
+     * @return $result / Tableau associatif les posts de la catégorie demandée
+     * 
+     * @see récupérer / les topics d'une catégorie en paramètre
+     */ 
+    public function showCategory($category)
+    {
+        $query = $this->connection->getConnection()->prepare(
+            "SELECT * FROM topics WHERE category = ? ORDER BY date_creation DESC"
+        );
+        $query->execute([$category]);
+        $result = $query->fetchAll();
+        return $result;
+    }
 
-        // Get latest topics
-        public function getLatestTopics()
-        {
-            // Request to show all topics of a category
-            $query = $this->connection->getConnection()->prepare(
-                "SELECT * FROM topics ORDER BY date_creation DESC"
-            );
-            // Exécution de la requête pour créer un utilisateur
-            $query->execute([]);
-            $result = $query->fetchAll();
-    
-            return $result;
-        }
+    /**
+     * @method getLatestTopics
+     * Récupérer tous les topics par ordre de dates décroissant
+     * 
+     * @return $result / Tableau associatif de tous les posts par ordre décroissant
+     * 
+     * @see récupérer tous les topics par ordre de date décroissant
+     */ 
+    public function getLatestTopics()
+    {
+        $query = $this->connection->getConnection()->prepare(
+            "SELECT * FROM topics ORDER BY date_creation DESC"
+        );
+        $query->execute([]);
+        $result = $query->fetchAll();
 
-        // Get latest topics
-        public function getTopic($topicId)
-        {
-            // Request to show all topics of a category
-            $query = $this->connection->getConnection()->prepare(
-                "SELECT * FROM topics 
-                LEFT JOIN cats ON topics.cat_id = cats.id
-                WHERE topics.id = ?"
-            );
-            // Exécution de la requête pour créer un utilisateur
-            $query->execute([$topicId]);
-            $result = $query->fetchAll();
-    
-            return $result;
-        }
+        return $result;
+    }
 
-        // Add a comment
-        public function addComment($catId, $topicId, $content)
-        {
-            // Request to show all topics of a category
-            $query = $this->connection->getConnection()->prepare(
-                "INSERT INTO comments (cat_id, topic_id, content) VALUES (?, ?, ?)"
-            );
-            // Exécution de la requête pour créer un utilisateur
-            $query->execute([$catId, $topicId, $content]);
-        }
+    /**
+     * @method getTopic @param $topicId
+     * Récupérer un topic par son id
+     * 
+     * @return $result / Tableau avec les informations de l'objet
+     * 
+     * @see réupérer un topic avec son id
+     */ 
+    public function getTopic($topicId)
+    {
+        $query = $this->connection->getConnection()->prepare(
+            "SELECT * FROM topics 
+            LEFT JOIN cats ON topics.cat_id = cats.id
+            WHERE topics.id = ?"
+        );
+        $query->execute([$topicId]);
+        $result = $query->fetchAll();
 
-        // Récupère les derniers commentaires
-        public function getComments($topicId)
-        {
-            // Request to show all topics of a category
-            $query = $this->connection->getConnection()->prepare(
-                "SELECT comments.id, cat_id, topic_id, content, pseudo, date_creation FROM comments 
-                INNER JOIN cats ON comments.cat_id = cats.id
-                WHERE topic_id = ? AND parent_id IS NULL
-                ORDER BY comments.date_creation DESC"
-            );
-            // Exécution de la requête pour créer un utilisateur
-            $query->execute([$topicId]);
-            $result = $query->fetchAll();
-    
-            return $result;
-        }
+        return $result;
+    }
 
-        // Ajouter une réponse à un commentaires dans les commentaires
-        public function addResponse($catId, $topicId, $content, $commentId)
-        {
-            // Request to show all topics of a category
-            $query = $this->connection->getConnection()->prepare(
-                "INSERT INTO comments (cat_id, topic_id, content, parent_id) VALUES (?, ?, ?, ?)"
-            );
-            // Exécution de la requête pour créer un utilisateur
-            $query->execute([$catId, $topicId, $content, $commentId]);
-        }
+    /**
+     * @method addComment @param $catId, $topicId, $content
+     * Ajouter un commerce
+     *  
+     * @see ajouter un commentaire à un topice dans la table comments
+     */ 
+    public function addComment($catId, $topicId, $content)
+    {
+        $query = $this->connection->getConnection()->prepare(
+            "INSERT INTO comments (cat_id, topic_id, content) VALUES (?, ?, ?)"
+        );
+        $query->execute([$catId, $topicId, $content]);
+    }
 
-        // Récupère les dernières réponses de commentaires
-        public function getResponses($commentId)
-        {
-            // Request to show all topics of a category
-            $query = $this->connection->getConnection()->prepare(
-                "SELECT comments.id, parent_id, cat_id, topic_id, content, pseudo, date_creation FROM comments 
-                INNER JOIN cats ON comments.cat_id = cats.id
-                WHERE topic_id = ? AND parent_id IS NOT NULL
-                ORDER BY comments.date_creation DESC"
-            );
-            // Exécution de la requête pour créer un utilisateur
-            $query->execute([$commentId]);
-            $result = $query->fetchAll();
-    
-            return $result;
-        }
+    /**
+     * @method addComment @param $catId, $topicId, $content
+     * Ajouter un commentaire
+     *  
+     * @see ajouter un commentaire à un topic dans la table comments
+     */ 
+    public function getComments($topicId)
+    {
+        $query = $this->connection->getConnection()->prepare(
+            "SELECT comments.id, cat_id, topic_id, content, pseudo, date_creation FROM comments 
+            INNER JOIN cats ON comments.cat_id = cats.id
+            WHERE topic_id = ? AND parent_id IS NULL
+            ORDER BY comments.date_creation DESC"
+        );
+        $query->execute([$topicId]);
+        $result = $query->fetchAll();
+
+        return $result;
+    }
+
+    /**
+     * @method addResponse @param $catId, $topicId, $content, $commentId
+     * Ajouter une réponse à un commentaire
+     *  
+     * @see ajouter un commentaire à un topic dans la table comments avec un parent_id correspondant au commentaire commenté
+     */ 
+    public function addResponse($catId, $topicId, $content, $commentId)
+    {
+        $query = $this->connection->getConnection()->prepare(
+            "INSERT INTO comments (cat_id, topic_id, content, parent_id) VALUES (?, ?, ?, ?)"
+        );
+        $query->execute([$catId, $topicId, $content, $commentId]);
+    }
+
+    /**
+     * @method getResponses @param $commentId / Récupère les dernières réponses à un commentaire
+     * 
+     * @return $result / tableau des réponses à un commentaire
+     *  
+     * @see récupère toutes les réponses à un commentaire en fonction de son id parent_id
+     */ 
+    public function getResponses($commentId)
+    {
+        $query = $this->connection->getConnection()->prepare(
+            "SELECT comments.id, parent_id, cat_id, topic_id, content, pseudo, date_creation FROM comments 
+            INNER JOIN cats ON comments.cat_id = cats.id
+            WHERE topic_id = ? AND parent_id IS NOT NULL
+            ORDER BY comments.date_creation DESC"
+        );
+        $query->execute([$commentId]);
+        $result = $query->fetchAll();
+
+        return $result;
+    }
 }

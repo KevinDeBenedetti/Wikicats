@@ -1,38 +1,58 @@
 <?php
-
+/**
+ * @uses Users => Model utilisé pour toutes les intéractions avec les Users
+ */
 namespace Application\Model\Users;
 
+/**
+ * Appelle de la bdd
+ */
 require_once('./src/lib/database.php');
 
+/**
+ * Utilisation du namespace de la bdd
+ */
 use Application\Lib\Database\DatabaseConnection;
 
+/**
+ * Classe UsersRepository
+ */
 class UsersRepository 
 {
-    // Declare public property
+    /** 
+     * @property $connection => propriété de la bdd
+     * 
+     * @see accès à la bdd
+     */
     public DatabaseConnection $connection;
 
-    // Méthode pour creér un utilisateur
+    /**
+     * @method createUser @param $pseudo, $email, $password, $certified / Créer un utilisateur
+     * 
+     * @see créer un utilisateur
+     */ 
     public function createUser($pseudo, $email, $password, $certified)
     {
-
-        // Préparation de la requête pour créer un utilisateur
         $query = $this->connection->getConnection()->prepare(
             "INSERT INTO cats (pseudo, email, password, certified) VALUES (?, ?, ?, ?)"
         );
-        // Exécution de la requête pour créer un utilisateur
         $query->execute([$pseudo, $email, $password, $certified]);
-
     }
 
-    // Méthode pour connecter un utilisateur
+    /**
+     * @method logintUser @param $email, $password / Connecter un utilisateur
+     * 
+     * @return $result / mot de passe utilisateur pour le vérifier
+     * 
+     * @return $_SESSION si l'utilisateur existe et le redirige vers la page profil
+     * 
+     * @see Connecter un utilisateur et le rediriger vers la page profil
+     */ 
     public function logintUser($email, $password) {
-        // Requête pour chercher l'email dans la bdd
         $query = $this->connection->getConnection()->prepare(
             "SELECT * FROM cats WHERE email = ?"
         );
-        // Exécution de la requête pour connecter un utilisateur
         $query->execute([$email]);
-
         $result = $query->fetch();
         
         if ($query->rowCount() == 0) {
@@ -51,18 +71,25 @@ class UsersRepository
         }
     }
 
-    // Method to conenct a user
+    /**
+     * @method updateUser @param $pseudo, $email, $password, $catId / Modifier les informations d'un utilisateur
+     * 
+     * @see Modifier les informations d'un utilisateur et rediriger vers la page profil
+     */ 
     public function updateUser($pseudo, $email, $password, $catId) 
     {
-        // Request to modify user information
         $query = $this->connection->getConnection()->prepare(
             "UPDATE cats SET pseudo = ?, email = ?, password = ? WHERE id = ?"
         );
-        // Execution of the request to connect a user
         $query->execute([$pseudo, $email, $password, $catId]);        
     }
 
     // Method to get user information
+    /**
+     * @method getUserInfo @param $catId / Récupérer les informations d'un utilisateur
+     * 
+     * @see Récupérer les informations d'un utilisateur
+     */ 
     public function getUserInfo($catId)
     {
         $query = $this->connection->getConnection()->prepare(

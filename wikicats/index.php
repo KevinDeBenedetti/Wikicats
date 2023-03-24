@@ -14,6 +14,8 @@ require_once("./src/controllers/topics.php");
 
 /**
  * Utilisation des namespaces pour appeler les méthodes à exécuter dans le routeur.
+ * 
+ * @todo mise en ligne du site sur hébergeur
  */
 use Application\Controllers\Topics\Topics;
 use Application\Controllers\Users\Users;

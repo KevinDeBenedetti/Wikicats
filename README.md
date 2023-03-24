@@ -1,6 +1,9 @@
 # Wikicats
 ECF Back End - DWWM
 
+## Documentation
+La documentation a été généré avec phpDocumentor [Documentation phpDocumentor](./doc) => ouvrir index.html dans un navigateur
+
 ## Contexte
 Vous êtes un chat passioné de nouvelle technologie et de développement. Pour les besoins de votre plan chatchiavélique de croquette du monde, la mise en place d'un chatforum est indispensable ! 
 
@@ -40,5 +43,7 @@ L'évaluation portera sur :
   - fonctionnement de l'application
 
 Vous êtes autorisé à utiliser toutes les astuces pour rendre l'expérience utilisateur plus agréable et amusante, comme des avatars de chat, des émojis personnalisés pour les moustaches, et même un compteur de croquettes mangées pour chaque utilisateur !
+
+
 
 

@@ -1,7 +1,17 @@
 <?php
-
+/**
+ * @uses Database 
+ */
 namespace Application\Lib\Database;
 
+/**
+ * @class DatabaseConnection / Connexion à la bdd
+ * 
+ * @method $result tableau des topics par utilisateur
+ * 
+ * @see bdd wikicats
+ * 
+ */ 
 class DatabaseConnection
 {
     public ?\PDO $database = null;

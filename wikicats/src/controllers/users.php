@@ -60,11 +60,12 @@ class Users
 
     /**
      * @method register() => créer un nouvel utilisateur
+     * 
+     * @uses vérification des input avec les sécurités nécessaires avec hash du mot de passe et message d'erreur si tous les champs ne sont pas remplis
+     * 
+     * @method createUser @param $pseudo, $email, $password, $certified / Envoie des champs pour créer l'utilisateur dans la bdd
      */
     public function createUser() {
-        /**
-         * @uses vérification des input avec les sécurités nécessaires avec hash du mot de passe et message d'erreur si tous les champs ne sont pas remplis
-         */
         if (empty(htmlspecialchars($_POST['pseudo']))) {
             throw new \Exception("Le miaou pseudo est requis");
         } else {
@@ -93,13 +94,8 @@ class Users
         }
         
         $usersRepository = new UsersRepository();
-
         $usersRepository->connection = new DatabaseConnection();
 
-        /**
-         * @method createUser @param $pseudo, $email, $password, $certified
-         * Envoie des champs pour créer l'utilisateur dans la bdd
-         */
         $usersRepository->createUser($pseudo, $email, $password, $certified);
 
         header("Location: ./index.php?action=login");
@@ -107,13 +103,14 @@ class Users
     }
 
     /**
-     * @method register() => connecter un utilisateur
+     * @method loginUser() => connecter un utilisateur
+     * 
+     * @uses vérification des input avec les sécurités nécessaires et message d'erreur si tous les champs ne sont pas remplis
+     * 
+     * @method logintUser @param $email, $password / Envoie des champs au model pour connecter l'utilisateur dans la bdd
      */
     public function loginUser()
     {
-        /**
-         * @uses vérification des input avec les sécurités nécessaires et message d'erreur si tous les champs ne sont pas remplis
-         */
         if (empty(htmlspecialchars($_POST['email']))) {
             throw new \Exception("Le miaou email est requis");
         } else {
@@ -128,10 +125,6 @@ class Users
         $usersRepository = new UsersRepository();
         $usersRepository->connection = new DatabaseConnection();
 
-        /**
-         * @method logintUser @param $email, $password
-         * Envoie des champs au model pour connecter l'utilisateur dans la bdd
-         */
         $usersRepository->logintUser($email, $password);
 
         header("Location: ./index.php?action=account");
@@ -140,12 +133,17 @@ class Users
 
     /**
      * @method modifyUser() => modifier un utilisateur
+     * 
+     * @uses vérification des input avec les sécurités nécessaires et on récupère l'id de l'utilisateur connecté
+     * 
+     * @method getUserInfo @param $catId / Envoie des champs au model pour vérifier si le mot de passe correspond à la base de données
+     * 
+     * @uses vérification du changement de mot de passe
+     * 
+     * @method updateUser @param $pseudo, $email, $password, $catId / Envoie des champs au model pour modifier les informations de l'utilisateur
      */
     public function modifyUser() 
     {
-        /**
-         * @uses vérification des input avec les sécurités nécessaires et on récupère l'id de l'utilisateur connecté
-         */
         $pseudo = filter_var($_POST['pseudo'], FILTER_SANITIZE_SPECIAL_CHARS);
         $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
         $catId = $_SESSION['id'];
@@ -153,29 +151,17 @@ class Users
         $usersRepository = new UsersRepository();
         $usersRepository->connection = new DatabaseConnection();
 
-        /**
-         * @method getUserInfo @param $catId
-         * Envoie des champs au model pour vérifier si le mot de passe correspond à la base de données
-         */
         $result = $usersRepository->getUserInfo($catId);
         $password = $result['password'];
 
-        /**
-         * @uses vérification du changement de mot de passe
-         */
         if (!empty(htmlspecialchars($_POST['password'])) && !empty(htmlspecialchars($_POST['passwordConfirm']))) {
             if (htmlspecialchars($_POST['password']) === htmlspecialchars($_POST['passwordConfirm'])) {
-                // Check if password are the same
                 $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
                 } else {
                     throw new \Exception("Les miaous mots de passes ne sont pas les mêmes.");
                 }
         }
 
-        /**
-         * @method updateUser @param $pseudo, $email, $password, $catId
-         * Envoie des champs au model pour modifier les informations de l'utilisateur
-         */
         $usersRepository->updateUser($pseudo, $email, $password, $catId);
         
         header("Location: ./index.php?action=account");
