@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * @uses Topics => Controller utilisé pour toutes les intéractions avec les topics
+ */
 namespace Application\Controllers\Topics;
 
 require_once('./src/lib/database.php');
@@ -7,6 +9,7 @@ require_once('./src/models/topics.php');
 
 use Application\Lib\Database\DatabaseConnection;
 use Application\Model\Topics\TopicsRepository;
+
 
 class Topics 
 {

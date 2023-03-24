@@ -1,30 +1,45 @@
 <?php
-
+/**
+ * @uses Topics => Model utilisé pour toutes les intéractions avec les topics
+ */
 namespace Application\Model\Topics;
 
+/**
+ * Appelle de la bdd
+ */
 require_once('./src/lib/database.php');
 
+/**
+ * Utilisation du namespace de la bdd
+ */
 use Application\Lib\Database\DatabaseConnection;
 
+/**
+ * Classe TopicsRepository
+ */
 class TopicsRepository
 {
-    // Declare public property
+    /** 
+     * @property $connection => propriété de la bdd
+     */
     public DatabaseConnection $connection;
 
-    // CreateTopic Method
+    /**
+     * @method createTopic @param $catId, $title, $content, $category
+     * Méthode pour créer un topic dans la bdd
+     */
     public function createTopic($catId, $title, $content, $category)
     {
-
-        // Préparation de la requête pour créer un utilisateur
         $query = $this->connection->getConnection()->prepare(
             "INSERT INTO topics (cat_id, title, content, category) VALUES (?, ?, ?, ?)"
         );
-        // Exécution de la requête pour créer un utilisateur
         $query->execute([$catId, $title, $content, $category]);
-
     }
 
-    // Get topics by user
+    /**
+     * @method getTopicsByUser @param $catId
+     * Méthode pour récupérer les topics d'un utilisateur
+     */    
     public function getTopicsByUser($catId)
     {
         // Préparation de la requête pour créer un utilisateur
