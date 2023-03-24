@@ -33,21 +33,19 @@
                 <p class="card-text">Voici les derniers commentaires du topic :</p>
                 <?php foreach ($comments as $comment) { ?>
 
-                <div class="card mt-1">
+                <div class="mt-1">
                     <div class="card-body">
-                        <h6 class="card-title">Commentaire de : <?= $comment['pseudo'] ?> le <?= $comment['date_creation'] ?> </h6>
-                        <p class="card-text"> <?= $comment['content'] ?> </p>
+                        <h6 class="card-title">@<?= $comment['pseudo'] ?> </h6>
+                        <p class="card-text"> <?= $comment['content'] ?> / Publié le <?= $comment['date_creation'] ?> </p>
                     </div>
                     <!-- Ajouter une réponse à un commentaire -->
-                    <div class="m-2">
-                        <div class="card-body ">
+                    <div class="card m-2">
+                        <div class="card-body">
 
                             <?php foreach ($responses as $response) { ?>
                             <?php if ($comment['id'] === $response['parent_id']) { ?>
-                            <div class="card p-2 bg-info-subtle">
-                                <p class="card-text">Commentaire de : <?= $response['pseudo'] ?></p>
-                                <p class="card-text"><?= $response['content'] ?></p>
-                                <p class="card-text">Ecrit le : <?= $response['date_creation'] ?></p>
+                            <div class="p-2">
+                                <p class="card-text">@<?= $response['pseudo'] ?> : <?= $response['content'] ?> / Publié le : <?= $response['date_creation'] ?></p>
                             </div>
                             <?php } ?>
                             <?php } ?>
