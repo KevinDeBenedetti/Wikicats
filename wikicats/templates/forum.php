@@ -38,7 +38,7 @@
 
                             <div class="fw-bold"><?= $latestTopic['title'] ?>
                             </div>
-                            <p class="fw-light card-text">Catégorie : <?= $latestTopic['category'] ?></p>
+                            <p class="fw-light card-text">Catégorie : <?= $latestTopic['category'] ?> - Créé le <?= $latestTopic['date_creation'] ?></p>
 
                         </div>
 

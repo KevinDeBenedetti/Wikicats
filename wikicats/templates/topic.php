@@ -12,11 +12,12 @@
             <div class="card-body">
                 <h2 class="card-title"><?= $topic[0]['title'] ?></h2>
 
-                <h3 class="card-title">Category : <?= $topic[0]['category'] ?></h3>
+                <h3 class="card-title">@<?= $topic[0]['pseudo'] ?></h3>
 
                 <p class="card-text"><?= $topic[0]['content'] ?></p>
 
-                <p class="card-text"><?= $topic[0]['date_creation'] ?></p>
+                <p class="card-text">Catégorie : <?= $topic[0]['category'] ?> - Date de création : <?= $topic[0]['date_creation'] ?></p>
+
             </div>
 
         </div>
