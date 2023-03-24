@@ -29,7 +29,7 @@ CREATE TABLE `cats` (
   `password` varchar(255) NOT NULL,
   `certified` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDBDEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +38,7 @@ CREATE TABLE `cats` (
 
 LOCK TABLES `cats` WRITE;
 /*!40000 ALTER TABLE `cats` DISABLE KEYS */;
-INSERT INTO `cats` VALUES (7,'Bernard','bernard@minou.fr','$2y$10$Zm5SJTtcMDtk7AsX0.z5LuotM2n.Bh9FiwEKy4uEdFl8zszbU13wy',1),(8,'Miam','miam@cat.cr','$2y$10$VJ1a1w157BRN1ZxIoCP.SOtGMQyiINEsETU0ovqQX.8e4NcEd55.2',1),(9,'Miaous','miaous@pokemon.pk','$2y$10$HBzL.pl2xXir8tDmRgfC5OjzkR3j87pRIe2WKjTwaDVqYnRNs7YYe',1),(10,'Catman','catman@catman.cat','$2y$10$.s5hYW5zoF3tWbwIa/LFgePCZRcHev8dswVJhOc8MKfS1b7zLC50u',1),(11,'Chat','chat@chat.fr','$2y$10$qclrFW3mGulp6zNBCEfif.T537WmXop15r7hdw/9BxM4ljRNEYY0a',1),(12,'Miaous','miaous@miaous.fr','$2y$10$70fwfpgbJjGBbFHN547SpepuGROVDZ50qsD37yg10up7rT.DuG34C',1);
+INSERT INTO `cats` VALUES (7,'Bernard','bernard@minou.fr','$2y$10$Zm5SJTtcMDtk7AsX0.z5LuotM2n.Bh9FiwEKy4uEdFl8zszbU13wy',1),(8,'Miam','miam@cat.cr','$2y$10$VJ1a1w157BRN1ZxIoCP.SOtGMQyiINEsETU0ovqQX.8e4NcEd55.2',1),(9,'Miaous','miaous@pokemon.pk','$2y$10$HBzL.pl2xXir8tDmRgfC5OjzkR3j87pRIe2WKjTwaDVqYnRNs7YYe',1),(10,'Catman','catman@catman.cat','$2y$10$.s5hYW5zoF3tWbwIa/LFgePCZRcHev8dswVJhOc8MKfS1b7zLC50u',1),(11,'Chat','chat@chat.fr','$2y$10$qclrFW3mGulp6zNBCEfif.T537WmXop15r7hdw/9BxM4ljRNEYY0a',1);
 /*!40000 ALTER TABLE `cats` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -60,10 +60,8 @@ CREATE TABLE `comments` (
   KEY `fk_comments_cats` (`cat_id`),
   KEY `fk_comments_topics` (`topic_id`),
   CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`cat_id`) REFERENCES `cats` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`topic_id`) REFERENCES `topics` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `fk_comments_cats` FOREIGN KEY (`cat_id`) REFERENCES `cats` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `fk_comments_topics` FOREIGN KEY (`topic_id`) REFERENCES `topics` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`topic_id`) REFERENCES `topics` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDBDEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -94,7 +92,7 @@ CREATE TABLE `topics` (
   KEY `fk_topics_cats` (`cat_id`),
   CONSTRAINT `fk_topics_cats` FOREIGN KEY (`cat_id`) REFERENCES `cats` (`id`) ON DELETE CASCADE,
   CONSTRAINT `topics_ibfk_1` FOREIGN KEY (`cat_id`) REFERENCES `cats` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDBDEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -103,7 +101,7 @@ CREATE TABLE `topics` (
 
 LOCK TABLES `topics` WRITE;
 /*!40000 ALTER TABLE `topics` DISABLE KEYS */;
-INSERT INTO `topics` VALUES (5,7,'Dans quel sens lécher son pelage','A mon humble miaou, tout dépend du pelage du félin. Le sens dépend aussi de la longueur de la langue du minou','Toilettage','2023-03-23 08:56:35'),(7,7,'La marche à 4 pattes','Quelle distance parcourir chaque jour pour être en bonne santé ? ','Santé','2023-03-23 13:20:24'),(9,10,'Étirement sur un plaid tout doux','Tous les matins je libère dégourdi mes petites pattes en faisant du yoga plaid. Quel bonheur ! Vous en pensez quoi ?','Yoga','2023-03-24 11:13:15'),(10,10,'Les insectes du sud est','Une liste des meilleurs insectes à manger en milieu rural','Chasse','2023-03-24 12:07:48'),(11,10,'Les rendez-vous du vendredi soir à Arles','Comme d\'habitude pour les minous avertis, nos rencontres se dérouleront au village des entreprises dans le parc ou les humains déjeunent.','Rencontres libertines','2023-03-24 12:09:53'),(12,7,'Attraper des oiseaux de jour','Auriez vous des conseils pour mieux chasser le jour, car perso j\'y vois beaucoup moins bien et c\'est un peu galère','Chasse','2023-03-24 13:30:21'),(13,12,'Léchage derrière les oreilles','Salut les minous, je viens vers vous car j\'ai un souci de taille, avec l\'âge je manque de souplesse pour me lécher derrières les oreilles, auriez vous des conseils ? ','Toilettage','2023-03-24 19:52:07');
+INSERT INTO `topics` VALUES (5,7,'Dans quel sens lécher son pelage','A mon humble miaou, tout dépend du pelage du félin. Le sens dépend aussi de la longueur de la langue du minou','Toilettage','2023-03-23 08:56:35'),(7,7,'La marche à 4 pattes','Quelle distance parcourir chaque jour pour être en bonne santé ? ','Santé','2023-03-23 13:20:24'),(9,10,'Étirement sur un plaid tout doux','Tous les matins je libère dégourdi mes petites pattes en faisant du yoga plaid. Quel bonheur ! Vous en pensez quoi ?','Yoga','2023-03-24 11:13:15'),(10,10,'Les insectes du sud est','Une liste des meilleurs insectes à manger en milieu rural','Chasse','2023-03-24 12:07:48'),(11,10,'Les rendez-vous du vendredi soir à Arles','Comme d\'habitude pour les minous avertis, nos rencontres se dérouleront au village des entreprises dans le parc ou les humains déjeunent.','Rencontres libertines','2023-03-24 12:09:53'),(12,7,'Attraper des oiseaux de jour','Auriez vous des conseils pour mieux chasser le jour, car perso j\'y vois beaucoup moins bien et c\'est un peu galère','Chasse','2023-03-24 13:30:21');
 /*!40000 ALTER TABLE `topics` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -116,4 +114,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-03-24 21:18:17
+-- Dump completed on 2023-03-24 15:00:16
