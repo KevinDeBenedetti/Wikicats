@@ -1,0 +1,50 @@
+CREATE TABLE cats (
+  id INT NOT NULL AUTO_INCREMENT,
+  pseudo VARCHAR(50) NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  certified BOOLEAN DEFAULT FALSE,
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE topics (
+  id INT NOT NULL AUTO_INCREMENT,
+  cat_id INT NOT NULL,
+  title VARCHAR(255) NOT NULL,
+  content TEXT NOT NULL,
+  category VARCHAR(255) NOT NULL,
+  date_creation TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  FOREIGN KEY (cat_id) REFERENCES cats(id) ON DELETE CASCADE
+);
+
+CREATE TABLE comments (
+  id INT NOT NULL AUTO_INCREMENT,
+  parent_id INT NULL,
+  cat_id INT NOT NULL,
+  topic_id INT NOT NULL,
+  content TEXT NOT NULL,
+  date_creation TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  FOREIGN KEY (cat_id) REFERENCES cats(id) ON DELETE CASCADE,
+  FOREIGN KEY (topic_id) REFERENCES topics(id) ON DELETE CASCADE
+);
+
+ALTER TABLE topics ADD CONSTRAINT fk_topics_cats
+  FOREIGN KEY (cat_id) REFERENCES cats(id) ON DELETE CASCADE;
+
+ALTER TABLE comments ADD CONSTRAINT fk_comments_cats
+  FOREIGN KEY (cat_id) REFERENCES cats(id) ON DELETE CASCADE;
+
+ALTER TABLE comments ADD CONSTRAINT fk_comments_topics
+  FOREIGN KEY (topic_id) REFERENCES topics(id) ON DELETE CASCADE;
+
+
+
+
+
+
+
+
+
+
