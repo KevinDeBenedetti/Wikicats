@@ -17,3 +17,11 @@ a {
     max-width: 330px;
     padding: 15px;
 }
+
+#catLottie {
+    width: 200px;
+    height: 200px;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
