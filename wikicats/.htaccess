@@ -1,0 +1,13 @@
+RewriteEngine On
+
+RewriteRule ^accueil$ index.php [L]
+RewriteRule ^forum$ index.php?action=forum [L]
+RewriteRule ^connexion$ index.php?action=login [L]
+RewriteRule ^inscription$ index.php?action=register [L]
+RewriteRule ^profil$ index.php?action=account [L]
+
+# Ne pas appliquer aux fichiers existants
+# RewriteCond %{REQUEST_FILENAME} !-f
+# RewriteCond %{REQUEST_FILENAME} !-d
+
+# RewriteRule ^(.*)$ index.php?action=$1 [QSA,L,R=301]

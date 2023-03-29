@@ -24,11 +24,11 @@
                 <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
 
                     <li>
-                        <a href="./index.php" class="nav-link px-2 link-secondary">Accueil</a>
+                        <a href="./accueil" class="nav-link px-2 link-secondary">Accueil</a>
                     </li>
 
                     <li>
-                        <a href="./index.php?action=forum" class="nav-link px-2 link-dark">
+                        <a href="./forum" class="nav-link px-2 link-dark">
                             <i class="fa-solid fa-cat"></i>
                             Forum
                         </a>
@@ -43,7 +43,7 @@
                 <!-- If the user is connected -->
 
                 <button type="button" class="btn-perso btn btn-outline-primary me-2">
-                    <a href="./index.php?action=account">Profil</a>
+                    <a href="./profil">Profil</a>
                 </button>
                 <button type="button" class="btn btn-danger">
                     <a href="./index.php?action=logout">Déconnexion</a>
@@ -53,11 +53,11 @@
 
                 <!-- If the user is not connected -->
 
-                <button href="./index.php?action=login" type="button" class="btn btn-outline-primary me-2">
-                    <a href="./index.php?action=login">Se connecter</a>    
+                <button type="button" class="btn btn-outline-primary me-2">
+                    <a href="./connexion">Se connecter</a>    
                 </button>
-                <button href="./index.php?action=register" type="button" class="btn btn-outline-primary">
-                    <a href="./index.php?action=register">S'inscrire</a>    
+                <button type="button" class="btn btn-outline-primary">
+                    <a href="./inscription">S'inscrire</a>    
                 </button>
 
                 <?php } ; ?>
