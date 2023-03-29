@@ -42,7 +42,7 @@
                     
                 <!-- If the user is connected -->
 
-                <button type="button" class="btn btn-outline-primary me-2">
+                <button type="button" class="btn-perso btn btn-outline-primary me-2">
                     <a href="./index.php?action=account">Profil</a>
                 </button>
                 <button type="button" class="btn btn-danger">
@@ -83,6 +83,7 @@
 
     <!-- Ajout du chat qui suit le curseur -->
     <script src="https://cdn.jsdelivr.net/npm/lottie-web@5.7.9/build/player/lottie.js"></script>
+    
     <script type="module" src="./src/index.js"></script>
 
 </html>

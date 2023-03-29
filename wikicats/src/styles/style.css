@@ -1,3 +1,15 @@
+/* :root {
+    --bs-btn-border-color: #ed6e1b;
+} */
+
+/* .btn-primary {
+    --bs-btn-border-color: #ed6e1b;
+} */
+
+/* .btn-primary {
+    background-color: var(--bs-btn-border-color);
+} */
+
 * {
     padding: 0;
     margin: 0;
@@ -25,3 +37,7 @@ a {
     top: 0;
     left: 0;
 }
+
+/* .btn-perso {
+    background-color: #ed6e1b;
+} */

@@ -81,6 +81,9 @@ class Users
         } else {
             if (htmlspecialchars($_POST['password']) === htmlspecialchars($_POST['passwordConfirm'])) {
                 $password = htmlspecialchars($_POST['password']);
+                if (strlen($password) < 8 || !preg_match("/\d/", $password) || !preg_match("/[!@#$%^&*()\-_=+{};:,<.>]/", $password)) {
+                    throw new \Exception("Le miaou mot de passe doit contenir au moins 8 caractères, 1 chiffre et 1 caractère spécial.");
+                }
                 $password = password_hash($password, PASSWORD_DEFAULT);
             } else {
                 throw new \Exception("Les miaous mots de passes ne sont pas les mêmes.");
