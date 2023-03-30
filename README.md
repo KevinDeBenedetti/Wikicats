@@ -5,6 +5,7 @@ Accéder au site web des chats de la communauté Wikicats
 👉 [Wikicats](http://wikicats.web-agency.go.yo.fr/index.php)
 
 ## Dernières mises à jour
+- [ ] En cours / Ajout .htaccess, des règles de redirections et de sécurité - 29/03/2023
 - [x] Ajout de la sécurisation du mot de passe à l'inscription (Minimum: 8 caractères, 1 chiffre et 1 caractère spécial) - 29/03/2023
 - [x] Ajout d'un chat qui suit le curseur - 27/03/2023
 
