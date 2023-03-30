@@ -1,4 +1,4 @@
-<?php $title = "Forum"; ?>
+<?php $title = "Wikicats - Forum"; ?>
 
 <?php ob_start(); ?>
 

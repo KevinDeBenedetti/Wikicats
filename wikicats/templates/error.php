@@ -1,4 +1,4 @@
-<?php $title = "Une erreur est survenue sur le site : "; ?>
+<?php $title = "Wikicats - Erreur"; ?>
 
 <?php ob_start(); ?>
 

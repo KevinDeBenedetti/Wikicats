@@ -1,4 +1,4 @@
-<?php $title = "Connect"; ?>
+<?php $title = "Wikicats - Connexion"; ?>
 
 <?php ob_start(); ?>
 
